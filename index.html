@@ -1,0 +1,922 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ENEM × UNIVESP</title>
+<meta name="description" content="O que cai no ENEM e na Univesp, em que ordem estudar e onde está cada assunto no livro.">
+<meta name="theme-color" content="#0e0e10">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230e0e10'/%3E%3Cpath d='M9 8h11v3h-7.5v3.5H19v3h-6.5V21H20v3H9z' fill='%238b93ff'/%3E%3C/svg%3E">
+<style>
+  :root {
+    --bg: #0e0e10;
+    --ink: #ececef;
+    --muted: #8b8b94;
+    --faint: #5a5a63;
+    --line: #232329;
+    --accent: #8b93ff;
+  }
+  * { box-sizing: border-box; }
+  html { background: var(--bg); color-scheme: dark; -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, sans-serif; -webkit-font-smoothing: antialiased; }
+  a { color: inherit; text-decoration: none; }
+  main { max-width: 920px; margin: 0 auto; padding: 64px 24px 120px; }
+  section + section { margin-top: 88px; }
+
+  h1 { font-size: 30px; font-weight: 650; letter-spacing: -.02em; margin: 0 0 6px; }
+  h1 span { color: var(--faint); font-weight: 400; margin: 0 4px; }
+  .lead { color: var(--muted); font-size: 14.5px; margin: 0 0 40px; }
+  h2 { font-size: 22px; font-weight: 650; letter-spacing: -.01em; margin: 0; }
+  .src { color: var(--faint); font-size: 13px; line-height: 1.6; margin: 8px 0 0; max-width: 640px; }
+  .src b { color: var(--muted); font-weight: 500; }
+  .label { font-size: 11.5px; letter-spacing: .12em; text-transform: uppercase; color: var(--faint); font-weight: 600; }
+  .label.t1 { color: var(--accent); }
+
+  /* ---------- visão geral ---------- */
+  .overview { display: grid; grid-template-columns: 1.1fr 1fr 1fr; gap: 48px; }
+  .col h3 { font-size: 17px; font-weight: 650; margin: 0; }
+  .col .sub { color: var(--faint); font-size: 13px; margin: 2px 0 18px; }
+  .order .label { display: block; margin: 20px 0 8px; }
+  .order .label:first-of-type { margin-top: 0; }
+  .order ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px 16px; }
+  .order li a { font-size: 15px; }
+  .order li a:hover { color: var(--accent); }
+  .order .t1 a { color: var(--accent); font-weight: 600; }
+  .order .t3 a { color: var(--muted); }
+  .rows { list-style: none; margin: 0; padding: 0; }
+  .rows li { display: flex; justify-content: space-between; gap: 12px; padding: 6px 0; font-size: 15px; }
+  .rows li small { color: var(--faint); font-size: 13px; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .rows li.hl > span { color: var(--accent); }
+  .rows li .area { color: var(--faint); font-size: 12.5px; display: block; }
+  .edital { display: inline-block; margin-top: 14px; color: var(--accent); font-size: 14px; font-weight: 500; }
+  .edital:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+  /* ---------- listas que abrem ---------- */
+  .head { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+  .search { background: transparent; border: 0; outline: 0; color: var(--ink); font: inherit; font-size: 15px; padding: 4px 0; width: 220px; max-width: 100%; }
+  .search::placeholder { color: var(--faint); }
+  .tier { margin: 36px 0 6px; }
+  ul.list { list-style: none; margin: 0; padding: 0; }
+  details > summary { list-style: none; cursor: pointer; display: flex; align-items: baseline; gap: 10px; -webkit-tap-highlight-color: transparent; }
+  details > summary::-webkit-details-marker { display: none; }
+  details > summary::before {
+    content: "›"; color: var(--faint); width: 12px; height: 1em; line-height: 1; flex: none; display: inline-block;
+    text-align: center; transition: transform .15s; transform-origin: 50% 50%; align-self: center;
+  }
+  details[open] > summary::before { transform: rotate(90deg); }
+  summary:hover .name { color: var(--accent); }
+  .top > summary { padding: 10px 0; }
+  .top > summary .name { font-size: 18px; font-weight: 600; }
+  .top.t1 > summary .name { color: var(--accent); }
+  .top.t3 > summary .name { color: var(--muted); }
+  .meta { color: var(--faint); font-size: 13px; }
+  ul.topics { list-style: none; margin: 0; padding: 2px 0 12px 22px; }
+  .topic > summary { padding: 6px 0; }
+  .topic > summary .name { font-size: 15px; }
+  .subs { list-style: none; margin: 2px 0 8px; padding: 0 0 0 22px; }
+  .subs li { color: var(--muted); font-size: 14px; padding: 3px 0; }
+  .subs li::before { content: "–"; color: var(--faint); margin-right: 8px; }
+  .subs li.book::before { content: ""; margin: 0; }
+  .subs li.book a { color: var(--faint); font-size: 12.5px; }
+  .subs li.book a:hover { color: var(--accent); }
+  .q-links li.years { display: block; color: var(--faint); font-size: 12.5px; padding: 6px 0 2px; line-height: 1.7; }
+  .years b { color: var(--muted); font-weight: 500; }
+  mark { background: none; color: var(--accent); font-weight: 600; }
+  .empty { color: var(--faint); display: none; margin-top: 24px; }
+
+  /* caderno */
+  ul.q-links { list-style: none; margin: 0; padding: 0 0 12px 22px; }
+  .q-links li { padding: 5px 0; font-size: 15px; display: flex; gap: 10px; align-items: baseline; }
+  .q-links li a:hover { color: var(--accent); }
+  .q-links li small { color: var(--faint); font-size: 13px; }
+
+  footer { margin-top: 96px; color: var(--faint); font-size: 12.5px; }
+
+  /* ---------- topo: contagem, livro, progresso ---------- */
+  .status { display: flex; flex-wrap: wrap; gap: 8px 28px; margin: -24px 0 40px; font-size: 13.5px; color: var(--muted); }
+  .status b { color: var(--ink); font-weight: 600; font-variant-numeric: tabular-nums; }
+  .status small { color: var(--faint); font-size: 12.5px; }
+  .status button, .linkbtn { background: none; border: 0; padding: 0; font: inherit; color: var(--accent); cursor: pointer; }
+  .status button:hover, .linkbtn:hover { text-decoration: underline; text-underline-offset: 3px; }
+  .bar { height: 3px; background: var(--line); border-radius: 2px; overflow: hidden; width: 120px; display: inline-block; vertical-align: middle; margin-left: 8px; }
+  .bar i { display: block; height: 100%; background: var(--accent); }
+  .order li .pct { color: var(--faint); font-size: 12px; margin-left: 5px; font-variant-numeric: tabular-nums; }
+  .nota { color: var(--faint); font-size: 12px; line-height: 1.5; margin: 10px 0 0; }
+
+  /* ---------- tópicos com marcação ---------- */
+  .topic-row { display: flex; align-items: flex-start; gap: 8px; }
+  .topic-row > details { flex: 1; min-width: 0; }
+  .chk { flex: none; width: 16px; height: 16px; margin: 9px 0 0; accent-color: var(--accent); cursor: pointer; }
+  .chk-sp { flex: none; width: 16px; }
+  .topic-row.feito .topic > summary .name { color: var(--faint); text-decoration: line-through; text-decoration-color: var(--line); }
+  .tag { color: var(--faint); font-size: 11.5px; border: 1px solid var(--line); border-radius: 4px; padding: 0 5px; white-space: nowrap; }
+  .meta .ok { color: var(--accent); }
+
+  /* ---------- livro: escolher arquivo + leitor ---------- */
+  .modal { position: fixed; inset: 0; background: rgba(0,0,0,.6); display: flex; align-items: center; justify-content: center; padding: 16px; z-index: 20; }
+  .modal[hidden], .leitor[hidden] { display: none; }
+  .caixa { background: #16161a; border: 1px solid var(--line); border-radius: 12px; padding: 24px; max-width: 420px; width: 100%; }
+  .caixa h3 { margin: 0 0 10px; font-size: 18px; }
+  .caixa p { color: var(--muted); font-size: 14px; line-height: 1.55; margin: 0 0 18px; }
+  .caixa .acoes { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; }
+  .btn { display: inline-block; background: var(--accent); color: #0e0e10; font-weight: 600; font-size: 14px; border: 0; border-radius: 8px; padding: 9px 16px; cursor: pointer; font-family: inherit; }
+  .btn:hover { filter: brightness(1.1); }
+  .msg { color: var(--faint); font-size: 13px; margin: 14px 0 0 !important; min-height: 1em; }
+  .msg.erro { color: #ff8b8b; }
+
+  .leitor { position: fixed; inset: 0; background: #1b1b20; z-index: 10; display: flex; flex-direction: column; }
+  .lt-barra { display: flex; align-items: center; gap: 10px; padding: 8px 12px; background: var(--bg); border-bottom: 1px solid var(--line); font-size: 14px; flex-wrap: wrap; }
+  .lt-barra button { background: transparent; color: var(--ink); border: 1px solid var(--line); border-radius: 6px; font: inherit; min-width: 34px; height: 32px; padding: 0 10px; cursor: pointer; }
+  .lt-barra button:hover { border-color: var(--faint); }
+  .lt-barra button:disabled { opacity: .35; cursor: default; }
+  .lt-titulo { color: var(--muted); flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .lt-grupo { display: flex; align-items: center; gap: 6px; color: var(--faint); }
+  .lt-grupo input { width: 64px; height: 32px; background: transparent; color: var(--ink); border: 1px solid var(--line); border-radius: 6px; font: inherit; text-align: center; -moz-appearance: textfield; }
+  .lt-grupo input::-webkit-inner-spin-button { -webkit-appearance: none; }
+  .lt-area { flex: 1; overflow: auto; -webkit-overflow-scrolling: touch; padding: 12px; text-align: center; }
+  .lt-area canvas { background: #fff; box-shadow: 0 2px 16px rgba(0,0,0,.4); max-width: none; }
+  .lt-status { color: var(--muted); font-size: 14px; padding: 40px 0; }
+
+  @media (max-width: 860px) {
+    main { padding: 40px 20px 96px; }
+    .overview { grid-template-columns: 1fr 1fr; gap: 40px 32px; }
+    .overview .order { grid-column: 1 / -1; }
+  }
+  @media (max-width: 560px) {
+    h1 { font-size: 26px; }
+    .overview { grid-template-columns: 1fr; }
+    .search { width: 100%; }
+    .top > summary .name { font-size: 17px; }
+    .meta { font-size: 12px; }
+    main { padding-left: 16px; padding-right: 16px; }
+    .lt-titulo { flex-basis: 100%; order: 3; font-size: 12.5px; }
+    .lt-barra { gap: 8px; }
+  }
+</style>
+</head>
+<body>
+<main>
+
+<!-- ============ VISÃO GERAL ============ -->
+<section>
+  <h1>ENEM <span>×</span> UNIVESP</h1>
+  <p class="lead">O que cai em cada prova e em que ordem estudar.</p>
+  <div class="status">
+    <span id="contagem"></span>
+    <span id="progresso"></span>
+    <span id="livro-estado"></span>
+  </div>
+
+  <div class="overview">
+    <div class="col order">
+      <h3>Ordem de estudo</h3>
+      <div class="sub">o que cai nas duas provas vem primeiro</div>
+      <div id="order"></div>
+    </div>
+
+    <div class="col">
+      <h3>ENEM</h3>
+      <div class="sub">2 dias · 180 questões</div>
+      <ul class="rows">
+        <li><span>Linguagens<span class="area">Português, Literatura, Inglês ou Espanhol, Artes, Ed. Física</span></span><small>45</small></li>
+        <li><span>Ciências Humanas<span class="area">História, Geografia, Filosofia, Sociologia</span></span><small>45</small></li>
+        <li class="hl"><span>Ciências da Natureza<span class="area">Física, Química, Biologia</span></span><small>45</small></li>
+        <li class="hl"><span>Matemática</span><small>45</small></li>
+        <li><span>Redação</span><small>0–1000</small></li>
+      </ul>
+      <a class="edital" href="https://www.gov.br/inep/pt-br/areas-de-atuacao/avaliacao-e-exames-educacionais/enem" target="_blank" rel="noopener">Edital ENEM ↗</a>
+    </div>
+
+    <div class="col">
+      <h3>UNIVESP</h3>
+      <div class="sub">1 dia · 56 questões</div>
+      <ul class="rows">
+        <li class="hl"><span>Matemática</span><small>10</small></li>
+        <li><span>Português</span><small>10</small></li>
+        <li class="hl"><span>Física</span><small>6</small></li>
+        <li><span>Química</span><small>6</small></li>
+        <li><span>Biologia</span><small>6</small></li>
+        <li><span>História</span><small>6</small></li>
+        <li><span>Geografia</span><small>6</small></li>
+        <li><span>Inglês</span><small>6</small></li>
+        <li><span>Redação</span><small>0–100</small></li>
+      </ul>
+      <p class="nota">O total (56 questões) e a redação (0–100) são oficiais. A divisão por matéria é uma estimativa: confira no edital de 2027.</p>
+      <a class="edital" href="https://vestibular.univesp.br" target="_blank" rel="noopener">Edital Univesp ↗</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ O QUE ESTUDAR ============ -->
+<section id="estudar">
+  <div class="head">
+    <h2>O que estudar</h2>
+    <input class="search" id="q" type="search" placeholder="Buscar assunto…" autocomplete="off">
+  </div>
+  <p class="src">
+    Fonte: livro <b>ENEM Teoria Completa</b>, de Tatiani Carvalho (Editora Avançar, <b>2024</b>). Os tópicos e as páginas vêm dele.
+    Os temas de <b>Atualidades</b> são de 2024 e podem estar desatualizados; complete com notícias recentes.
+  </p>
+  <div id="list"></div>
+  <p class="empty" id="empty">Nada encontrado.</p>
+</section>
+
+<!-- ============ CADERNO DE QUESTÕES ============ -->
+<section id="caderno">
+  <div class="head">
+    <h2>Caderno de questões</h2>
+    <input class="search" id="q2" type="search" placeholder="Buscar matéria ou assunto…" autocomplete="off">
+  </div>
+  <p class="src">
+    Questões de provas anteriores do ENEM (INEP), do mesmo livro, a partir da p. 1177. Cada matéria tem o gabarito no final.
+    Estude o conteúdo, depois faça as questões. O livro vai até <b>2022</b>; as provas mais recentes estão no
+    <a class="edital" style="margin:0" href="https://www.gov.br/inep/pt-br/areas-de-atuacao/avaliacao-e-exames-educacionais/enem/provas-e-gabaritos" target="_blank" rel="noopener">site do INEP ↗</a>
+  </p>
+  <div id="qlist"></div>
+  <p class="empty" id="empty2">Nada encontrado.</p>
+</section>
+
+<footer>
+  Páginas = número da página no PDF do livro. O livro não fica no site: na primeira vez, cada aparelho escolhe o arquivo PDF,
+  que fica guardado só naquele navegador. As marcações de “estudado” também ficam só no navegador.
+</footer>
+
+<!-- escolher o PDF -->
+<div class="modal" id="pegar" hidden role="dialog" aria-modal="true" aria-labelledby="pegar-titulo">
+  <div class="caixa">
+    <h3 id="pegar-titulo">Abrir o livro</h3>
+    <p>O livro <b>ENEM Teoria Completa</b> não fica no site. Escolha o arquivo PDF que está neste aparelho. Ele fica guardado
+      só neste navegador e não é enviado para lugar nenhum. Você só precisa fazer isso uma vez por aparelho.</p>
+    <div class="acoes">
+      <label class="btn">Escolher o PDF<input type="file" accept="application/pdf,.pdf" id="arquivo" hidden></label>
+      <button class="linkbtn" id="pegar-cancelar" type="button">Cancelar</button>
+    </div>
+    <p class="msg" id="pegar-msg"></p>
+  </div>
+</div>
+
+<!-- leitor do livro -->
+<div class="leitor" id="leitor" hidden role="dialog" aria-modal="true" aria-label="Livro">
+  <div class="lt-barra">
+    <button id="lt-fechar" type="button" aria-label="Fechar">✕</button>
+    <span class="lt-titulo" id="lt-titulo"></span>
+    <div class="lt-grupo">
+      <button id="lt-ant" type="button" aria-label="Página anterior">‹</button>
+      <input id="lt-pag" type="number" inputmode="numeric" min="1" aria-label="Página">
+      <span id="lt-total"></span>
+      <button id="lt-prox" type="button" aria-label="Próxima página">›</button>
+    </div>
+    <div class="lt-grupo">
+      <button id="lt-menos" type="button" aria-label="Diminuir">−</button>
+      <button id="lt-mais" type="button" aria-label="Aumentar">+</button>
+    </div>
+  </div>
+  <div class="lt-area" id="lt-area"><canvas id="lt-canvas"></canvas><p class="lt-status" id="lt-status"></p></div>
+</div>
+</main>
+
+<script>
+  // ================= CONTEÚDO (livro ENEM Teoria Completa, 2024) =================
+  // tier: 1 prioridade · 2 nas duas provas · 3 só ENEM
+  // topics: [título, página do PDF, subtópicos, 'pular' = nível superior, não cai nas provas]
+  var SUBJECTS = [
+    { id: 'matematica', n: 'Matemática', tier: 1, rank: '1º', uni: '10 questões', enem: 'Matemática', p: [339, 550], topics: [
+      ['Teoria dos conjuntos', 339, ['Relação de pertinência e subconjuntos', 'Conjunto vazio, universo e das partes', 'Representações de um conjunto', 'Operações: união, interseção, diferença e complemento', 'Propriedades das operações', 'Cardinalidade de conjuntos finitos']],
+      ['Conjuntos numéricos', 342, ['Números naturais e inteiros', 'Critérios de divisibilidade (2 a 12)', 'Números primos', 'Fatoração (decomposição em fatores primos)', 'Número de divisores', 'MMC e MDC', 'Números coprimos']],
+      ['Números racionais e reais', 348, ['Frações: comparação e operações', 'Potenciação e radiciação', 'Decimais exatos e dízimas periódicas', 'Fração geratriz', 'Relação de ordem e desigualdades', 'Valor absoluto (módulo)', 'Operações na forma decimal', 'Números irracionais', 'Reta real e intervalos', 'Operações com intervalos']],
+      ['Razão, proporção e porcentagem', 352, ['Grandezas proporcionais', 'Regra de três simples', 'Regra de três composta', 'Razão centesimal', 'Aumentos e reduções percentuais']],
+      ['Funções', 359, ['Definição, domínio, contradomínio e imagem', 'Lei e gráfico de uma função', 'Função injetora, sobrejetora e bijetora', 'Função par, ímpar e periódica', 'Raiz de uma função', 'Função crescente e decrescente', 'Função definida por várias sentenças', 'Função constante e função afim (1º grau)', 'Estudo dos sinais', 'Função quadrática: discriminante, vértice, máximos e mínimos', 'Função composta', 'Função inversa', 'Translação e reflexão de gráficos', 'Função modular']],
+      ['Equações e inequações', 372, ['Conceitos: incógnita, conjunto-universo e conjunto-solução', 'Princípios de resolução', 'Equações do 1º grau', 'Sistemas de equações do 1º grau', 'Equações do 2º grau e estudo das raízes', 'Equações produto e quociente', 'Equações modulares', 'Inequações e estudo dos sinais', 'Inequações modulares']],
+      ['Função exponencial', 384, ['Função exponencial', 'Equações exponenciais', 'Inequações exponenciais']],
+      ['Logaritmos', 386, ['Definição e condições de existência', 'Propriedades dos logaritmos', 'Cologaritmo e antilogaritmo', 'Logaritmos decimais: característica e mantissa', 'Função logarítmica', 'Equações logarítmicas', 'Inequações logarítmicas']],
+      ['Trigonometria', 390, ['Razões trigonométricas', 'Relações fundamentais', 'Triângulos notáveis', 'Radianos', 'Lei dos senos', 'Lei dos cossenos', 'Ciclo trigonométrico', 'Funções seno e cosseno', 'Redução ao primeiro quadrante', 'Funções trigonométricas inversas', 'Adição e subtração de arcos', 'Arco duplo e arco metade', 'Equações trigonométricas', 'Inequações trigonométricas']],
+      ['Números complexos', 398, ['Unidade imaginária e suas potências', 'Forma algébrica', 'Igualdade, oposto e conjugado', 'Operações na forma algébrica', 'Plano de Argand-Gauss', 'Módulo e argumento', 'Forma trigonométrica e operações', 'Raízes da unidade']],
+      ['Sequências numéricas', 402, ['Progressão aritmética (PA): termo geral e soma', 'Progressão geométrica (PG): termo geral e soma', 'Soma da PG infinita', 'Dízima periódica como PG']],
+      ['Polinômios', 406, ['Produtos notáveis', 'Fatoração (agrupamento)', 'Teorema do resto', 'Equações polinomiais, raízes e relações de Girard']],
+      ['Análise combinatória', 413, ['Fatorial', 'Princípio aditivo e multiplicativo', 'Princípios da preferência, exclusão e controle de repetições', 'Princípio das casas de pombos', 'Permutações simples', 'Arranjos simples', 'Combinações simples', 'Combinações com repetição', 'Números binomiais', 'Binômio de Newton e termo geral', 'Triângulo de Pascal']],
+      ['Probabilidade', 419, ['Experimento aleatório, espaço amostral e evento', 'Espaço amostral equiprovável', 'União e interseção de eventos', 'Eventos mutuamente exclusivos e complementares', 'Probabilidade condicional', 'Eventos independentes', 'Probabilidade total', 'Teorema de Bayes', 'Experimentos binomiais']],
+      ['Matrizes, determinantes e sistemas', 425, ['Tipos de matriz: linha, coluna, quadrada, identidade', 'Igualdade, adição e subtração', 'Multiplicação por escalar e entre matrizes', 'Matriz transposta e inversa', 'Determinantes e cofator', 'Regra de Laplace', 'Propriedades dos determinantes', 'Sistemas lineares: soluções e classificação', 'Regra de Cramer', 'Escalonamento', 'Teorema de Rouché-Capelli']],
+      ['Geometria plana', 433, ['Entes geométricos primitivos', 'Ângulos: tipos, medidas e conversões', 'Ângulos complementares e suplementares', 'Retas paralelas cortadas por transversal', 'Classificação de triângulos', 'Soma dos ângulos internos', 'Semelhança e congruência de triângulos', 'Pontos notáveis: baricentro, incentro, circuncentro, ortocentro', 'Cevianas e Teorema de Tales', 'Teoremas da bissetriz interna e externa', 'Relação de Stewart', 'Relações métricas no triângulo retângulo', 'Teorema de Pitágoras', 'Polígonos: nomenclatura e diagonais', 'Áreas e perímetros: quadrado, retângulo, paralelogramo, losango, trapézio, triângulo', 'Fórmula de Heron e razão entre áreas', 'Circunferência e círculo: elementos, comprimento e área', 'Coroa e setor circular', 'Ângulo central e radianos', 'Potência de ponto', 'Polígonos inscritos e circunscritos', 'Elipse, parábola e hipérbole']],
+      ['Geometria espacial', 454, ['Pontos, retas e planos no espaço', 'Projeção ortogonal', 'Diedros e triedros', 'Poliedros e fórmula de Euler', 'Poliedros de Platão', 'Paralelepípedo e cubo', 'Prismas', 'Pirâmides', 'Cilindro: área e volume', 'Cone: área e volume', 'Esfera e suas partes (fuso, calota, cunha)', 'Tronco de pirâmide e de cone']],
+      ['Geometria analítica', 460, ['Coordenadas e distância entre pontos', 'Ponto médio', 'Área do triângulo e condição de alinhamento', 'Equação geral, reduzida e segmentária da reta', 'Retas paralelas e perpendiculares', 'Posição relativa entre retas', 'Distância entre ponto e reta', 'Inequações do 1º grau com duas variáveis', 'Equação da circunferência', 'Retas tangentes à circunferência', 'Cônicas: elipse, hipérbole e parábola (equações e excentricidade)']],
+      ['Estatística descritiva', 477, ['Tabelas e séries estatísticas', 'Gráficos: colunas, barras, curvas e setores', 'Média aritmética (dados agrupados e não agrupados)', 'Mediana', 'Moda', 'Quartis, decis e percentis', 'Amplitude e intervalo interquartil', 'Variância', 'Desvio médio e desvio padrão', 'Coeficiente de variação', 'Assimetria e curtose']],
+      ['Probabilidade avançada', 486, ['Axiomas e teoremas da probabilidade', 'Probabilidade condicional e independência', 'Teorema da probabilidade total e de Bayes', 'Variáveis aleatórias discretas e contínuas', 'Distribuições binomial, hipergeométrica, Poisson e normal', 'Esperança e momentos', 'Lei dos grandes números', 'Teorema central do limite', 'Amostras e distribuições amostrais'], 'pular'],
+      ['Inferência estatística', 504, ['Estimação pontual e propriedades dos estimadores', 'Intervalos de confiança', 'Testes de hipóteses e erros tipo I e II', 'Teste t de Student', 'Teste qui-quadrado'], 'pular'],
+      ['Regressão e amostragem', 514, ['Mínimos quadrados e máxima verossimilhança', 'Modelos de regressão linear', 'Análise de variância (ANOVA)', 'Análise de resíduos', 'Amostragem aleatória simples', 'Amostragem estratificada, sistemática e por conglomerados', 'Tamanho amostral'], 'pular'],
+      ['Raciocínio lógico', 520, ['Proposições simples e compostas', 'Conectivos lógicos e tabela-verdade', 'Tautologia, contradição e contingência', 'Princípios fundamentais da lógica', 'Implicação e equivalência lógica', 'Leis de De Morgan', 'Negação de proposições compostas', 'Diagramas lógicos', 'Proposições categóricas e quantificadores', 'Argumentos e silogismos', 'Argumento válido e inválido', 'Sentenças abertas', 'Sequências lógicas', 'Relação entre grandezas', 'Lógica de argumentação e falácias']]
+    ]},
+    { id: 'fisica', n: 'Física', tier: 1, rank: '2º', uni: '6 questões', enem: 'Ciências da Natureza', p: [5, 180], topics: [
+      ['Cinemática', 5, ['Medidas e grandezas físicas (SI)', 'Algarismos significativos', 'Grandezas vetoriais', 'Cinemática escalar e vetorial', 'Movimento retilíneo uniforme (MRU)', 'Sinal da velocidade e gráficos do MRU', 'Movimento retilíneo uniformemente variado (MRUV)', 'Gráficos do MRUV', 'Lançamentos', 'Movimento circular uniforme (MCU)', 'Movimento circular uniformemente variado (MCUV)', 'Grandezas lineares e angulares']],
+      ['Dinâmica', 20, ['Leis de Newton: inércia, princípio fundamental, ação e reação', 'Força de atrito', 'Trabalho', 'Energia e potência']],
+      ['Energia e quantidade de movimento', 23, ['Energia cinética', 'Energia potencial gravitacional', 'Energia potencial elástica', 'Conservação da energia', 'Impulso e quantidade de movimento (momento linear)', 'Conservação da quantidade de movimento', 'Choques mecânicos', 'Colisões elásticas e inelásticas']],
+      ['Gravitação', 28, ['Lei da gravitação universal de Newton', 'Aceleração da gravidade e campo gravitacional', 'Velocidade de órbita']],
+      ['Estática', 30, ['Estática do ponto material', 'Regra da poligonal, Teorema de Lamy e decomposição', 'Estática do corpo extenso rígido', 'Centro de gravidade', 'Equilíbrio de corpos apoiados e suspensos']],
+      ['Hidrostática', 34, ['Conceitos básicos de fluidos', 'Viscosidade', 'Massa específica e peso específico', 'Fluido ideal e incompressível', 'Equação de estado dos gases', 'Processos isotérmico, isobárico e isocórico', 'Pressão', 'Teorema de Stevin', 'Lei de Pascal', 'Escalas e unidades de pressão', 'Aparelhos medidores de pressão e equação manométrica', 'Princípio de Arquimedes (empuxo)', 'Equilíbrio de flutuação', 'Peso aparente']],
+      ['Cinemática dos fluidos', 58, ['Regime permanente e variado', 'Escoamento laminar e turbulento', 'Número de Reynolds', 'Trajetórias e linhas de corrente', 'Vazão', 'Equação da continuidade']],
+      ['Hidrodinâmica', 161, ['Energias associadas a um fluido', 'Equação de Bernoulli', 'Bernoulli com máquina: potência e rendimento', 'Bernoulli para fluido real', 'Medidas de pressão e de velocidade', 'Tubo de Pitot', 'Tubo de Venturi']],
+      ['Termologia e termodinâmica', 66, ['Escalas termométricas', 'Dilatação térmica', 'Transformações gasosas (isotérmica, isobárica, isocórica)', 'Calorimetria', 'Trocas de calor', 'Mudanças de fase (estado físico)', 'Transmissão de calor: condução, convecção e irradiação', 'Condutibilidade térmica e isolantes', 'Termodinâmica', 'Transformações termodinâmicas (inclui adiabática)']],
+      ['Eletrostática', 82, ['Condutores e isolantes', 'Princípios da eletrostática', 'Indução e polarização', 'Processos de eletrização', 'Eletroscópios', 'Lei de Coulomb', 'Campo elétrico', 'Linhas de força', 'Campo dentro de um condutor esférico', 'Potencial elétrico', 'Diferença de potencial (DDP)', 'Superfícies equipotenciais']],
+      ['Capacitores', 89, ['Capacidade elétrica', 'Equilíbrio eletrostático de condutores', 'Capacitor (condensador)', 'Densidade superficial de carga', 'Associação de capacitores']],
+      ['Eletrodinâmica', 93, ['Corrente elétrica', 'Resistência elétrica', 'Resistores ôhmicos e não ôhmicos', 'Trabalho, energia, potência elétrica e efeito Joule', 'Associação de resistores', 'Aparelhos de medição: amperímetro e voltímetro', 'Curto-circuito', 'Geradores e receptores', 'Gráficos do gerador e do receptor', 'Associação de geradores', 'Leis de Kirchhoff: lei das malhas e lei dos nós']],
+      ['Eletromagnetismo', 102, ['Ímãs e polos', 'Campo magnético e linhas de força', 'Campo magnético gerado por corrente (regra da mão direita)', 'Força magnética (regra da mão esquerda)', 'Indução eletromagnética', 'Lei de Faraday-Neumann', 'Corrente alternada e corrente contínua', 'Transformador']],
+      ['Movimento harmônico simples (MHS)', 107, ['Elongação e amplitude', 'Período e frequência', 'Pêndulo simples', 'Sistema corpo-mola', 'Frequência própria', 'Energia no MHS', 'Ressonância', 'Oscilações amortecidas']],
+      ['Ondulatória', 113, ['Elementos de uma onda', 'Equação de onda', 'Princípios da propagação ondulatória', 'Reversibilidade das ondas', 'Reflexão em cordas', 'Refração', 'Difração', 'Interferência (superposição)', 'Polarização', 'Dispersão', 'Ondas sonoras (acústica)', 'Características fisiológicas do som', 'Ondas em cordas', 'Tubos sonoros abertos e fechados']],
+      ['Óptica', 120, ['Velocidade da luz e ano-luz', 'Raio e feixe de luz', 'Meios de propagação', 'Princípios da óptica geométrica', 'Eclipses do Sol e da Lua', 'Reflexão e refração (regular e difusa)', 'Absorção e reflexão seletiva', 'Luz monocromática e policromática', 'Cor de um corpo', 'Espelhos planos e formação de imagem', 'Associação de espelhos planos', 'Espelhos esféricos (côncavo e convexo)', 'Condições de nitidez de Gauss e raios particulares', 'Construção de imagens', 'Equação de Gauss e aumento linear', 'Lentes esféricas: convergentes e divergentes', 'Construção de imagens em lentes', 'Vergência de uma lente', 'Equação dos fabricantes de lentes', 'Polarização da luz', 'Difração e interferência da luz']],
+      ['Física moderna', 132, ['Efeito fotoelétrico', 'Teoria quântica', 'Espectro eletromagnético', 'Dualidade onda-partícula']],
+      ['Relatividade', 171, ['Breve histórico', 'Referencial inercial', 'Postulados da relatividade especial', 'Dilatação do tempo', 'Contração do espaço (comprimento)', 'Massa relativística', 'Energia relativística', 'Velocidades relativísticas', 'Paradoxo dos gêmeos']],
+      ['Física quântica', 178, ['Origem', 'Aplicações da física quântica', 'Física quântica e pseudociência', 'Evolução estelar']],
+      ['Filosofia da ciência', 180, ['O que é ciência', 'Campo científico', 'Transitoriedade das teorias científicas', 'Método científico', 'Origem da filosofia da ciência', 'Limites da ciência', 'Principais filósofos da ciência']]
+    ]},
+    { id: 'redacao', n: 'Redação', tier: 1, rank: '3º', uni: '0 a 100', enem: '0 a 1000', p: [1037, 1176], topics: [
+      ['Competência I: norma culta', 1037, ['Domínio da modalidade escrita formal da língua portuguesa']],
+      ['Competência II: tema e tipo textual', 1037, ['Compreender a proposta e aplicar conceitos para desenvolver o tema', 'Fuga total ao tema e tangenciamento', 'Não atender ao tipo textual', 'O que é um texto dissertativo-argumentativo']],
+      ['Competência III: argumentação', 1040, ['Selecionar e organizar informações em defesa de um ponto de vista', 'Projeto de texto', 'Desenvolvimento']],
+      ['Competência IV: coesão', 1041, ['Mecanismos linguísticos de argumentação', 'Como garantir a coesão do texto']],
+      ['Competência V: proposta de intervenção', 1042, ['Proposta de intervenção para o problema', 'Respeito aos direitos humanos', 'O que é considerado desrespeito aos direitos humanos']],
+      ['Recomendações gerais', 1043, ['Orientações finais para a prova']],
+      ['Redações nota 1000 (ENEM 2022)', 1044, ['10 redações comentadas de participantes']],
+      ['Leitura e repertório', 1055, ['Leia mais, seja mais']],
+      ['Atualidades: blocos econômicos', 1057, ['União aduaneira, mercado comum e união econômica', 'União Europeia, Espaço Schengen e Brexit', 'Mercosul: Venezuela, Bolívia e acordo com a União Europeia', 'APEC', 'Acordo Estados Unidos, México e Canadá (USMCA)', 'Acordo Transpacífico (TPP)', 'Comunidade Andina']],
+      ['Atualidades: mundo', 1064, ['América Latina x América do Sul', 'Venezuela: crise política, humanitária e migratória', 'Argentina: crise cambial e FMI', 'Chile, Nicarágua, México e Peru', 'Colômbia: acordo de paz e FARC', 'Cuba, Paraguai, Bolívia e Equador', 'Estados Unidos', 'China', 'Ucrânia', 'França', 'Tensões Irã, Estados Unidos e Arábia Saudita', 'Síria, Sudão do Sul, Turquia e Mianmar', 'Estado Islâmico', 'Catar e Arábia Saudita', 'Israel, Hamas e Palestina']],
+      ['Atualidades: Brasil', 1115, ['Principais autoridades da República', 'Governos Temer, Bolsonaro e Lula', 'Crise política e Operação Lava Jato', 'Eleições de 2018', 'Casos Marielle, Queiroz e impeachment de Witzel', 'Desemprego e segurança pública', 'Desastres de Mariana e Brumadinho', 'Hydro Alunorte e óleo nas praias do Nordeste', 'Desmatamento e queimadas na Amazônia', 'Saúde: febre amarela, sarampo, dengue, obesidade, mortalidade infantil', 'Saneamento básico, IDH e educação', 'Fake news, cultura, trânsito e cinema brasileiro']]
+    ]},
+    { id: 'quimica', n: 'Química', tier: 2, uni: '6 questões', enem: 'Ciências da Natureza', p: [181, 248], topics: [
+      ['Gases', 181, ['Conceitos básicos: decomposição da água e síntese da amônia', 'Características dos gases', 'Variáveis de estado', 'Transformações gasosas', 'Equação geral dos gases', 'Quantidade de matéria e volume molar', 'Equação de estado dos gases ideais', 'Mistura de gases', 'Densidade dos gases e densidade relativa']],
+      ['Modelos atômicos e estrutura do átomo', 184, ['Modelo de Dalton', 'Modelo de Thomson', 'Modelo de Rutherford', 'Modelo de Bohr', 'Representação do átomo', 'Eletrosfera: camadas, níveis e subníveis', 'Distribuição eletrônica em átomos neutros', 'Distribuição eletrônica em íons']],
+      ['Tabela periódica', 187, ['Grupos e famílias', 'Camada de valência', 'Localização dos elementos', 'Subnível mais energético', 'Propriedades dos elementos', 'Propriedades periódicas']],
+      ['Cálculos químicos', 190, ['Fórmula percentual', 'Fórmula mínima (empírica)', 'Fórmula molecular', 'Balanceamento químico', 'Leis ponderais', 'Estequiometria', 'Reagente em excesso e reagente limitante', 'Pureza dos reagentes', 'Rendimento de uma reação']],
+      ['Materiais e suas propriedades', 197, ['Estados físicos da matéria', 'Mudanças de estado físico e diagramas', 'Substâncias e misturas', 'Processos de separação de misturas']],
+      ['Ligações químicas', 200, ['Ligação iônica', 'Ligação covalente', 'Ligação metálica', 'Polaridade das moléculas', 'Geometria molecular', 'Forças intermoleculares: íon-dipolo, dipolo-dipolo, dipolo induzido', 'Ligação de hidrogênio']],
+      ['Soluções', 206, ['Tipos de dispersão', 'Diluição de soluções', 'Propriedades coligativas']],
+      ['Funções inorgânicas', 207, ['Ácidos: nomenclatura, classificação e aplicações', 'Bases: classificação e aplicações', 'Indicadores ácido-base', 'Sais: neutralização, nomenclatura e classificação', 'Solubilidade em água', 'Óxidos: nomenclatura, classificação e principais óxidos']],
+      ['Termoquímica', 213, ['Energia nas reações', 'Entalpia padrão', 'Equação termoquímica', 'Entalpia de reações', 'Energia de ligação', 'Lei de Hess']],
+      ['Eletroquímica', 214, ['Número de oxidação (Nox)', 'Semirreações de oxidação e redução', 'Balanceamento de oxirredução', 'Pilhas e baterias', 'Potencial das pilhas', 'Eletrólise ígnea', 'Eletrólise em solução aquosa', 'Cátodo, ânodo e ordem de descarga', 'Lei de Faraday']],
+      ['Radioatividade', 218, ['Radiações alfa, beta e gama', 'Fissão e fusão nuclear', 'Meia-vida']],
+      ['Cinética química', 222, ['Velocidade de reação', 'Lei da velocidade', 'Influência da concentração']],
+      ['Equilíbrio químico', 224, ['Constante de equilíbrio', 'Princípio de Le Chatelier', 'Efeito da pressão', 'Constante de ionização de ácidos (Ka)', 'Constante de dissociação de bases', 'Lei da diluição de Ostwald', 'Produto iônico da água (pH e pOH)', 'Hidrólise salina', 'Produto de solubilidade (Kps)', 'Efeito do íon comum']],
+      ['Química orgânica', 228, ['História da química orgânica', 'Ligações nos compostos orgânicos', 'Classificação dos carbonos', 'Classificação das cadeias carbônicas', 'Representação dos compostos', 'Hibridização dos orbitais', 'Hidrocarbonetos e nomenclatura', 'Funções oxigenadas: álcoois, fenóis, éteres, aldeídos, cetonas, ácidos carboxílicos, ésteres', 'Funções nitrogenadas: aminas, amidas, nitrilas', 'Haletos orgânicos', 'Isomeria plana', 'Isomeria espacial (cis-trans)', 'Isomeria óptica']],
+      ['Bioquímica e polímeros', 235, ['Carboidratos: glicose, frutose, dissacarídeos, polissacarídeos', 'Amido, celulose e glicogênio', 'Proteínas', 'Ácidos graxos', 'Polímeros: polietileno, poliestireno, PVC, teflon', 'Borracha sintética, náilon e PET']],
+      ['Química, sociedade e meio ambiente', 240, ['Dióxido de carbono e efeito estufa', 'Chuva ácida', 'Acidez do solo', 'Resfriamento de bebidas com sal e gelo', 'Panela de pressão', 'Produção de etanol', 'Gás cloro, hidróxido de sódio, ácido sulfúrico', 'Amônia e ácido nítrico', 'Ferro e alumínio', 'Tratamento da água']],
+      ['Energia no cotidiano', 244, ['Petróleo', 'Gás natural', 'Carvão mineral', 'Impactos dos combustíveis fósseis', 'Biomassa', 'Biodiesel', 'Energia nuclear']]
+    ]},
+    { id: 'portugues', n: 'Português', tier: 2, uni: '10 questões', enem: 'Linguagens', p: [847, 892], topics: [
+      ['Gramática e variação linguística', 847, ['Para que serve a gramática', 'Variações linguísticas']],
+      ['Classes de palavras', 848, ['Classes e subclasses', 'Substantivo: gênero, número e grau', 'Adjetivo: gênero, número e grau', 'Verbo: flexões e formas nominais (infinitivo, gerúndio, particípio)', 'Pronomes pessoais', 'Pronomes demonstrativos, indefinidos, interrogativos e relativos', 'Artigo e numeral', 'Advérbio e locução adverbial']],
+      ['Regência verbal', 853, ['Regência dos verbos']],
+      ['Acentuação e crase', 860, ['Regras de acentuação', 'Ditongos e regras complementares', 'Crase']],
+      ['Morfossintaxe', 862, ['Sujeito e predicado', 'Tipos de sujeito', 'Voz ativa e voz passiva', 'Verbos impessoais: estar, fazer, haver', 'Tipos de predicado e predicação verbal', 'Termos ligados ao verbo: objeto direto e indireto', 'Termos ligados ao nome: adjunto adnominal e complemento nominal']],
+      ['Período composto', 864, ['Orações coordenadas assindéticas e sindéticas', 'Coordenadas: aditiva, adversativa, alternativa, explicativa, conclusiva', 'Conjunções', 'Orações subordinadas substantivas', 'Orações subordinadas adjetivas: restritiva e explicativa', 'Orações subordinadas adverbiais: causal, condicional, consecutiva, conformativa, concessiva, comparativa, final, proporcional, temporal']],
+      ['Pontuação: a vírgula', 870, ['Regras gerais', 'Quando não usar a vírgula', 'Uso obrigatório da vírgula', 'Vírgula no período composto']],
+      ['Concordância', 871, ['Concordância nominal: adjetivo e substantivo', 'Casos especiais (bastante, menos)', 'Concordância verbal: sujeito simples e composto', 'Verbos impessoais: haver, fazer e fenômenos da natureza']],
+      ['Colocação pronominal', 875, ['Próclise obrigatória e palavras atrativas', 'Mesóclise', 'Ênclise', 'Colocação nas locuções verbais']],
+      ['Figuras de linguagem', 877, ['Metáfora, comparação e sinestesia', 'Ironia', 'Metonímia, sinédoque e catacrese', 'Antonomásia (perífrase) e eufemismo', 'Anáfora, polissíndeto e assíndeto', 'Zeugma, elipse, pleonasmo e reiteração', 'Antítese e paradoxo', 'Aliteração, assonância e onomatopeia', 'Anacoluto, anástrofe, hipérbato e silepse', 'Apóstrofe, hipérbole e prosopopeia (personificação)']],
+      ['Texto e produção', 879, ['Tipos de argumento: autoridade, consenso, provas concretas, raciocínio lógico, competência linguística', 'Estrutura do texto dissertativo', 'Gêneros textuais', 'Artigo de opinião', 'Carta do leitor', 'Conto: estrutura, trama, ponto de vista e tipos', 'Crônica', 'Gêneros literários']]
+    ]},
+    { id: 'biologia', n: 'Biologia', tier: 2, uni: '6 questões', enem: 'Ciências da Natureza', p: [249, 338], topics: [
+      ['Características dos seres vivos', 249, ['Composição química', 'Células, energia e metabolismo', 'Crescimento e reprodução', 'Hereditariedade e evolução', 'Reação a estímulos e movimento', 'Níveis de organização dos seres vivos']],
+      ['Bioquímica da célula', 250, ['Água e sais minerais', 'Carboidratos: monossacarídeos, dissacarídeos, polissacarídeos', 'Lipídios', 'Proteínas e sua classificação', 'Enzimas', 'Vitaminas: funções, fontes e deficiências', 'Ácidos nucleicos (DNA e RNA)']],
+      ['Metabolismo celular', 256, ['Fermentação', 'Respiração', 'Fotossíntese']],
+      ['Citologia', 258, ['Tipos de célula (procariontes e eucariontes)', 'Membrana: permeabilidade celular', 'Transporte passivo e ativo', 'Transporte mediado por vesícula', 'Diferenciações da membrana', 'Citoplasma e organelas', 'Núcleo celular', 'Cromossomos e cariótipo', 'Divisão celular: intérfase, mitose e meiose']],
+      ['Ecologia e biodiversidade', 272, ['Biodiversidade: conceito, importância e ameaças', 'Biosfera', 'Os cinco reinos', 'Fatores bióticos e abióticos', 'Cadeias e teias alimentares', 'Relações ecológicas intra e interespecíficas (harmônicas e desarmônicas)', 'Autotrofismo, heterotrofismo e parasitismo', 'Fluxo de energia', 'Ciclos biogeoquímicos', 'Papel dos decompositores', 'Vegetais e produção de alimentos e matéria-prima']],
+      ['Respiração celular', 276, ['Respiração aeróbica', 'Glicólise', 'Ciclo de Krebs', 'Cadeia respiratória', 'Balanço energético', 'Respiração anaeróbica', 'Fermentação alcoólica e lática']],
+      ['Evolução', 281, ['Diversificação da vida e alterações da atmosfera', 'Criacionismo e fixismo', 'Lamarck: uso e desuso', 'Darwin e Wallace: seleção natural', 'Adaptações: camuflagem e mimetismo', 'Teoria sintética da evolução', 'Mutações']],
+      ['Reino animal', 284, ['Características do reino animal', 'Vertebrados: peixes, anfíbios, répteis, aves, mamíferos', 'Invertebrados: poríferos, cnidários, platelmintos, nematelmintos', 'Anelídeos, equinodermos, moluscos, artrópodes', 'Animais em extinção no Brasil']],
+      ['Microbiologia', 292, ['Protozoários (malária)', 'Bactérias (infecção urinária, clamídia)', 'Vírus (rubéola)', 'Fungos (candidíase)', 'Meningite']],
+      ['Genética', 295, ['Gregor Mendel e seus experimentos', '1ª lei de Mendel (monoibridismo)', '2ª lei de Mendel (diibridismo)', 'Heredogramas: construção e interpretação', 'Sistema ABO', 'Fator Rh', 'Incompatibilidade sanguínea']],
+      ['Biotecnologia', 298, ['Tipos e importância', 'História: microbiologia e descoberta do DNA', 'Engenharia genética e DNA recombinante', 'Biotecnologia na medicina e na agricultura', 'Revolução Verde', 'Biotecnologia ambiental', 'Benefícios e impactos negativos']],
+      ['Histologia', 301, ['Folhetos embrionários: ectoderme, mesoderme, endoderme', 'Tecido epitelial', 'Tecido conjuntivo', 'Tecido muscular', 'Tecido nervoso']],
+      ['Fisiologia', 302, ['Fisiologia humana e vegetal', 'Sistema circulatório: sangue, coração e vasos', 'Pequena e grande circulação', 'Circulação em invertebrados e vertebrados']],
+      ['Nutrição e saúde', 304, ['Carboidratos, proteínas e lipídios', 'Vitaminas, sais minerais, água e fibras', 'Digestão, absorção, transporte e excreção', 'Hipovitaminoses (A, B, C, D, E, K)']],
+      ['Sistema endócrino', 308, ['Hipófise', 'Tireoide e paratireoides', 'Timo', 'Suprarrenais', 'Pâncreas (insulina)', 'Glândulas sexuais']],
+      ['Reprodução e imunidade', 309, ['Reprodução assexuada', 'Reprodução sexuada', 'Leucócitos e anticorpos', 'Órgãos linfoides', 'Imunidade inata e adquirida', 'Memória imunológica']],
+      ['Anatomia e fisiologia humana', 311, ['Constituição do corpo humano', 'Sistema cardiovascular', 'Sistema urinário e néfron', 'Hormônios: insulina, corticoides, ocitocina', 'Sistema reprodutor feminino (estrogênio e progesterona)', 'Sistema reprodutor masculino', 'Sistema respiratório', 'Sistema digestório', 'Sistema esquelético e cartilagens', 'Musculatura esquelética', 'Sistema hematopoético', 'Sistema nervoso central', 'Pele e mucosas']],
+      ['Reprodução de plantas e micropropagação', 323, ['Reprodução comparada entre animais e plantas', 'Micropropagação', 'Organogênese e embriogênese somática', 'Meios de cultura', 'Biorreatores', 'Enraizamento e aclimatização', 'Plantas livres de vírus e criopreservação', 'Vantagens, limitações e problemas da micropropagação']]
+    ]},
+    { id: 'historia', n: 'História', tier: 2, uni: '6 questões', enem: 'Ciências Humanas', p: [551, 644], topics: [
+      ['Introdução aos estudos históricos', 551, ['Tempo histórico', 'Fontes históricas', 'História e cultura', 'Pré-História: Paleolítico e Neolítico', 'Pré-História brasileira']],
+      ['Brasil Colônia', 559, ['Choque de culturas', 'Período pré-colonial e ciclo do pau-brasil', 'Colonização', 'Ciclo do açúcar', 'Estrutura escravista da colônia', 'Declínio do açúcar', 'Expansão do território: jesuítas e missões', 'Entradas e bandeiras', 'Criadores de gado e tropeiros', 'Ciclo do ouro: administração, impostos e vida nas Minas', 'Período Pombalino', 'Revoltas nativistas: Beckman, Mascates, Filipe dos Santos', 'Inconfidência Mineira (1789)', 'Conjuração Baiana (1798)', 'Quilombo dos Palmares', 'Paraná: ocupação e tropeirismo']],
+      ['Independência do Brasil', 572, ['Vinda da família real portuguesa', 'Revolução Pernambucana (1817)', 'Revolução Liberal do Porto', 'Proclamação da Independência']],
+      ['Primeiro Reinado', 574, ['Reconhecimento da independência', 'Estruturas da nova nação', 'Confederação do Equador (1824)', 'Crise e abdicação de D. Pedro I']],
+      ['Período Regencial', 577, ['As regências', 'Revoltas regenciais', 'Revolta dos Malês (1835)', 'Golpe da Maioridade']],
+      ['Segundo Reinado', 579, ['Política no Segundo Reinado', 'Revolução Praieira (1848)', 'Economia: café, cacau e borracha', 'Legislação e relações exteriores', 'Era Mauá e industrialização', 'Imigração', 'Guerra do Paraguai (1864–1870)', 'Abolição da escravatura', 'Crise e fim do Império']],
+      ['Brasil República', 584, ['Revolta de Canudos (1893–1897)', 'Revolta da Vacina (1904)', 'Revolta da Chibata (1910)', 'Guerra do Contestado (1912–1916)', 'Tenentismo e Revolução de 1930', 'Era Vargas (1930–1945)', 'Revolução Constitucionalista de 1932', 'A volta de Vargas', 'JK, Jânio e Jango', 'Ditadura militar (1964–1985)', 'Redemocratização e democracia']],
+      ['Antiguidade', 595, ['Mesopotâmia', 'Egito', 'Fenícios, persas e hebreus', 'Grécia: períodos, Atenas e Esparta', 'Guerras Médicas e do Peloponeso', 'Período helenístico e Alexandre, o Grande', 'Mitologia grega', 'Roma: formação, república e império', 'Revolta de Spartacus e triunviratos', 'Queda do Império Romano']],
+      ['Idade Média', 605, ['Alta Idade Média', 'Feudalismo e sociedade feudal', 'Império Bizantino', 'Império Árabe', 'Formação dos reinos europeus: francos, Inglaterra, Península Ibérica', 'Guerra das Duas Rosas', 'Baixa Idade Média', 'Cruzadas', 'Guerra dos Cem Anos', 'Educação e cultura medieval', 'Fim da Idade Média']],
+      ['Idade Moderna', 610, ['Absolutismo', 'Expansão marítima e pioneirismo português', 'Tratado de Tordesilhas', 'Povos pré-colombianos: maias, astecas e incas', 'Colonização espanhola na América', 'Renascimento', 'Reforma: luteranismo, calvinismo, anglicanismo', 'Contrarreforma', 'Iluminismo']],
+      ['Idade Contemporânea', 619, ['Revolução Francesa: crise, Assembleia, Convenção e Diretório', 'Era Napoleônica', 'Congresso de Viena', 'Revolução Industrial: pioneirismo inglês e consequências', 'Resistência operária', 'Liberalismo econômico', 'Estados Unidos no século XIX e Guerra de Secessão', 'Primeira Guerra Mundial: causas, participantes e consequências', 'Brasil na Primeira Guerra', 'Revolução Russa (1917)', 'Crise de 1929', 'Regimes totalitários: fascismo, nazismo, franquismo', 'Segunda Guerra Mundial e consequências', 'Neocolonialismo na África e na Ásia', 'Descolonização', 'Revolução Cubana (1959)', 'Guerra Fria: paz armada, corrida espacial, Cortina de Ferro, Plano Marshall e Comecon', 'Fim da Guerra Fria']],
+      ['Impérios africanos', 642, ['Império Axum', 'Império Zimbábue', 'Império Gana', 'Império Mali', 'Império Songai']]
+    ]},
+    { id: 'geografia', n: 'Geografia', tier: 2, uni: '6 questões', enem: 'Ciências Humanas', p: [645, 718], topics: [
+      ['Geografia política', 645, ['Nova ordem mundial e hierarquia internacional', 'Guerra ao terror', 'Subdesenvolvimento: dependência econômica e tecnológica', 'Países subdesenvolvidos e emergentes', 'Primeiro mundo', 'Socialismo ideal e socialismo real']],
+      ['Globalização', 648, ['O que é globalização', 'Origem da globalização', 'Aspectos positivos e negativos', 'Efeitos da globalização']],
+      ['Fontes de energia', 650, ['Eólica', 'Solar', 'Hidrelétrica', 'Biomassa', 'Maremotriz', 'Combustíveis fósseis', 'Nuclear', 'Vantagens e desvantagens de cada fonte', 'Fontes de energia no Brasil']],
+      ['População mundial', 652, ['Distribuição da população', 'População rural e urbana', 'Idade e sexo da população', 'Tipologia étnica']],
+      ['Meio ambiente', 653, ['Degradação da água', 'Degradação ambiental: causas e efeitos', 'Política e meio ambiente']],
+      ['Orientação e cartografia', 656, ['Orientação pelo Sol, pela Lua e pela bússola', 'Instrumentos modernos de orientação', 'Coordenadas geográficas: paralelos e meridianos', 'Latitude e longitude', 'Movimentos de rotação e translação', 'Estações do ano', 'Fusos horários e Linha Internacional de Data', 'Fusos horários no Brasil e horário de verão', 'Cartografia', 'Escalas', 'Projeções: Mercator, Peters, cônica, azimutal, Robinson']],
+      ['Geologia: a Terra', 665, ['Estrutura e dinâmica da Terra', 'Deriva continental', 'Tectônica de placas', 'Interior da Terra e convecção', 'Minerais e rochas: tipos e ciclo das rochas', 'Vulcanismo', 'Tectonismo e sismos', 'Agentes internos e externos do relevo', 'Estrutura geológica', 'Recursos minerais']],
+      ['Hidrografia', 675, ['Recursos hídricos e dinâmica da hidrosfera', 'Distribuição e uso da água doce', 'Conflitos pela água', 'Oceanos e mares', 'Marés', 'Correntes marinhas']],
+      ['Clima', 680, ['Atmosfera e elementos climáticos', 'Temperatura e radiação', 'Pressão atmosférica', 'Umidade', 'Tempo e clima', 'Fatores do clima', 'Tipos climáticos', 'Mudanças climáticas']],
+      ['Domínios naturais (biomas)', 685, ['Florestas tropical e equatorial', 'Savanas', 'Desertos', 'Estepes, pradarias e campos', 'Vegetação mediterrânea', 'Florestas temperada e subtropical', 'Taiga', 'Tundra', 'Alterações antrópicas', 'Desmatamento e desertificação', 'Desenvolvimento sustentável']],
+      ['Impactos ambientais urbanos', 691, ['Poluição atmosférica', 'Ilhas de calor e tempestades urbanas', 'Chuva ácida']],
+      ['Indústria e energia', 692, ['1ª, 2ª e 3ª Revolução Industrial', 'Tipos de indústria', 'Localização e dispersão industrial', 'Carvão: produção e consumo', 'Petróleo, gás natural e OPEP']],
+      ['Transportes e agropecuária', 698, ['Transporte intercontinental', 'Transportes internos', 'Fluxo de informações', 'Produção agropecuária', 'Sistemas agrícolas', 'Estrutura agrária']],
+      ['Globalização e blocos econômicos', 702, ['Globalização e regionalização', 'Comércio mundial', 'Etapas de integração econômica', 'Nafta, União Europeia, Mercosul, Apec, Aliança do Pacífico']],
+      ['Espaço humano', 707, ['Teorias da população', 'Transição demográfica', 'Neomalthusianismo e controle de natalidade', 'Crescimento demográfico nos países pobres', 'Estrutura etária', 'Migrações atuais', 'Urbanização e espaço urbano', 'Problemas urbanos', 'Indicadores socioeconômicos']],
+      ['História do pensamento geográfico', 714, ['Antiguidade greco-romana', 'Idade Média, Renascimento e Iluminismo', 'Geografia moderna', 'Século XX e novas perspectivas', 'Geografia no Brasil']]
+    ]},
+    { id: 'ingles', n: 'Inglês', tier: 2, uni: '6 questões', enem: 'Linguagens · 5q', p: [1005, 1026], topics: [
+      ['Gramática e sintaxe', 1005, ['Substantivos: plural e possessivo', 'Artigos definidos e indefinidos', 'Pronomes pessoais e oblíquos', 'Adjetivos e pronomes possessivos', 'Pronomes demonstrativos, reflexivos, interrogativos, relativos e indefinidos', 'Adjetivos: comparativo, superlativo e formas irregulares', 'Preposições de tempo e lugar (at, on, in)', 'Preposições com substantivos, adjetivos e verbos', 'Conjunções coordenativas, subordinativas e correlativas', 'Advérbios de frequência', 'Tempos verbais: presente, passado e futuro (simples e contínuo)', 'Present perfect, past perfect e future perfect']],
+      ['Vocabulário e morfologia', 1014, ['Formação de palavras: prefixos, sufixos e raiz', 'Cognatos e falsos cognatos']],
+      ['Interpretação de textos', 1019, ['Conhecimento prévio e predição', 'Layout e pistas tipográficas', 'Conectores e marcadores textuais', 'Verbos irregulares (infinitivo, passado, particípio)']]
+    ]},
+    { id: 'filosofia', n: 'Filosofia', tier: 3, enem: 'Ciências Humanas', p: [791, 826], topics: [
+      ['Surgimento da filosofia', 791, ['Mito e razão', 'Conceito de filosofia', 'Formas de conhecimento: senso comum, mito, arte, filosofia e ciência', 'A pólis grega', 'Lógica: inferência, argumento e analogia']],
+      ['Filosofia clássica', 795, ['Pré-socráticos (Tales, Heráclito, Parmênides, Demócrito)', 'Sofistas', 'Sócrates', 'Platão: teoria do conhecimento e política', 'Aristóteles', 'Helenismo: cinismo, ceticismo, estoicismo e epicurismo']],
+      ['Filosofia medieval', 802, ['Patrística', 'Escolástica']],
+      ['Filosofia moderna', 803, ['Pensamento político (Maquiavel)', 'Thomas Hobbes', 'Ciência moderna (Galileu, Bacon)', 'Racionalismo: Descartes, Spinoza, Leibniz', 'Empirismo (Hume)']],
+      ['Filosofia contemporânea', 811, ['John Locke e Montesquieu', 'Voltaire', 'Rousseau', 'Jeremy Bentham', 'Immanuel Kant', 'Fichte e Schelling', 'Hegel', 'Kierkegaard', 'Schopenhauer', 'Nietzsche', 'Fenomenologia: Husserl e Heidegger', 'Existencialismo: Jaspers, Sartre, Simone de Beauvoir', 'Hannah Arendt', 'Escola de Frankfurt', 'Filosofia analítica', 'Filosofia pós-moderna']]
+    ]},
+    { id: 'sociologia', n: 'Sociologia', tier: 3, enem: 'Ciências Humanas', p: [719, 790], topics: [
+      ['Surgimento da sociologia', 719, ['O conhecimento social', 'Os clássicos: Comte, Durkheim, Marx e Weber', 'Indivíduo e sociedade']],
+      ['Trabalho e produção', 724, ['Relações de produção do pré-capitalismo ao trabalho fabril', 'Direitos trabalhistas no Brasil', 'Desenvolvimento tecnológico e flexibilização', 'Transformações no mundo do trabalho', 'Precarização do trabalho e exclusão social']],
+      ['Política, Estado e poder', 729, ['Formação do Estado moderno', 'O que é poder', 'Formas de poder e de exercício do poder']],
+      ['Problemas sociais contemporâneos', 732, ['Violência física e simbólica', 'Marginalidade', 'Uso de drogas', 'Globalização, neoliberalismo e aldeia global', 'Economia solidária', 'Problemas ambientais urbanos e áreas de risco', 'Educação no Brasil: indicadores e reforma do ensino médio', 'Sociologia como ciência: Durkheim (fato social) e Marx', 'Movimentos sociais do século XX', 'Religião na sociedade: Estado laico e visão de Marx, Durkheim e Weber']],
+      ['Gênero', 738, ['Igualdade de gênero e feminismos', 'Construção social do sexo', 'Divisão do trabalho doméstico', 'Gênero, sexo e orientação sexual', 'Homofobia e transfobia', 'Patriarcado', 'Gênero no discurso das ciências sociais']],
+      ['Cultura e identidade', 743, ['Etnia e raça: comportamento aprendido', 'Patrimônio histórico e cultural: material e imaterial', 'Identidade pessoal, nacional e de gênero', 'Etnocentrismo e colonização', 'Ethos', 'Multiculturalismo e diversidade cultural']],
+      ['Cidadania e comunicação', 747, ['Direitos humanos e cidadania', 'Declaração Universal dos Direitos Humanos', 'Direitos humanos no Brasil', 'Meios de comunicação: tipos e evolução']],
+      ['Desigualdade e ideologia', 753, ['Desigualdade social para Marx', 'Desigualdade no Brasil', 'Liberalismo político e econômico', 'Neoliberalismo']],
+      ['Ética e moral', 766, ['Conceito e campo da ética', 'Ética e justiça', 'Moral, amoral e imoral', 'Valores', 'Ética e liberdade', 'Bem comum e tipos de interesse', 'Pensamento político medieval: Agostinho e Tomás de Aquino', 'Política na modernidade e na contemporaneidade', 'Família, sociedade civil e Estado', 'Política e ética: dilemas éticos']]
+    ]},
+    { id: 'literatura', n: 'Literatura', tier: 3, enem: 'Linguagens', p: [827, 846], topics: [
+      ['Introdução à literatura', 827, ['Conceito de literatura', 'Literatura como conhecimento, cultura e identidade', 'Literatura como representação estética', 'Contexto de produção e circulação', 'Escolas literárias', 'Literatura e outras artes', 'Gêneros literários', 'Elementos da narrativa']],
+      ['Trovadorismo e Humanismo', 830, ['Contexto e características', 'Produção lírica e satírica', 'Humanismo', 'Gil Vicente']],
+      ['Classicismo', 831, ['Contexto e características', 'Camões e Os Lusíadas', 'Sá de Miranda']],
+      ['Quinhentismo', 832, ['Literatura informativa (Pero Vaz de Caminha)', 'Literatura catequética (Anchieta)']],
+      ['Barroco', 833, ['Contexto e características', 'Gregório de Matos', 'Padre Antônio Vieira']],
+      ['Arcadismo', 833, ['Contexto e características', 'Cláudio Manuel da Costa', 'Tomás Antônio Gonzaga', 'Basílio da Gama e Santa Rita Durão']],
+      ['Romantismo', 835, ['Contexto e características', 'Gonçalves Dias, Álvares de Azevedo, Casimiro de Abreu, Castro Alves', 'José de Alencar e Joaquim Manuel de Macedo']],
+      ['Realismo e Naturalismo', 836, ['Contexto e características', 'Machado de Assis', 'Aluísio Azevedo', 'Raul Pompeia e Eça de Queirós']],
+      ['Parnasianismo', 838, ['Contexto e características', 'Olavo Bilac, Raimundo Correia e Alberto de Oliveira']],
+      ['Simbolismo', 839, ['Contexto e características', 'Cruz e Sousa', 'Alphonsus de Guimaraens']],
+      ['Pré-Modernismo', 840, ['Contexto e características', 'Euclides da Cunha', 'Lima Barreto, Monteiro Lobato, Augusto dos Anjos, Graça Aranha']],
+      ['Modernismo', 841, ['Semana de Arte Moderna de 1922', 'Contexto e características', 'Oswald de Andrade, Mário de Andrade, Manuel Bandeira', 'Drummond, Cecília Meireles, João Cabral', 'Graciliano Ramos, Clarice Lispector, Guimarães Rosa']],
+      ['Literatura contemporânea (1950–1980)', 844, ['Contexto e características', 'Poesia concreta (irmãos Campos, Décio Pignatari)', 'Poesia marginal (Chacal, Leminski)', 'Literatura engajada e ditadura', 'Literatura brutalista (Rubem Fonseca)']]
+    ]},
+    { id: 'artes', n: 'Artes', tier: 3, enem: 'Linguagens', p: [907, 1004], topics: [
+      ['Arte: conceitos e concepções', 907, ['Compreensão social da arte', 'Conceitos de arte', 'Arte como vida e profissão', 'Fundamentos da arte na educação', 'Estética do cotidiano']],
+      ['Artes cênicas e audiovisual', 918, ['Visão geral', 'Artes cênicas e artes audiovisuais']],
+      ['Música no Brasil (Colônia ao Império)', 919, ['Música e catequese', 'Papel do negro na música colonial', 'Minas Gerais: auge da música colonial', 'Padre José Maurício', 'D. Pedro I como compositor', 'Francisco Manuel', 'Carlos Gomes', 'Leopoldo Miguez']],
+      ['Teatro no Brasil', 923, ['Surgimento do teatro no Brasil', 'Comédia de costumes', 'Teatro realista', 'Teatro brasileiro no século XX']],
+      ['Dança no Brasil', 924, ['Dança indígena', 'Dança clássica e balé', 'Dança moderna', 'Dança contemporânea']],
+      ['Audiovisual: arte, técnica e linguagem', 926, ['Audiovisual na sociedade tecnológica', 'Linguagem audiovisual', 'Fotografia e reprodutibilidade', 'Cinema, televisão e sociedade do espetáculo', 'Iluminação, áudio e processos do cinema', 'Audiovisual e educação no Brasil (INCE, TV Escola)', 'Audiovisual na escola']],
+      ['Romantismo', 947, ['Contexto histórico', 'Oposição ao classicismo', 'Nacionalismo e sentimentalismo', 'Romantismo em Portugal e no Brasil']],
+      ['Impressionismo e Pós-Impressionismo', 949, ['Pintura e obras impressionistas', 'Principais artistas (incluindo mulheres impressionistas)', 'Impressionismo no Brasil', 'Música e literatura impressionista', 'Impressionismo e fotografia', 'Pós-impressionismo: características e artistas']],
+      ['Vanguardas europeias', 953, ['Expressionismo: arquitetura, escultura, pintura, literatura, música e cinema', 'Fauvismo', 'Cubismo: fases cezanniana, analítica e sintética', 'Futurismo', 'Dadaísmo', 'Surrealismo', 'Cada vanguarda no Brasil']],
+      ['Arte contemporânea', 964, ['Arte conceitual', 'Arte povera', 'Arte cinética', 'Pop art (Andy Warhol)', 'Op art', 'Expressionismo abstrato', 'Minimalismo', 'Land art', 'Arte urbana: grafite, stencil, lambe-lambe, sticker art', 'Grafiteiros: Banksy, Os Gêmeos, Kobra', 'Body art']],
+      ['Arte no Brasil', 978, ['Arte indígena: cerâmica, máscaras, pintura corporal, cestaria, plumária', 'Barroco no Brasil', 'Modernismo no Brasil: três fases', 'Arte modernista', 'Diversidade cultural por região']],
+      ['Linguagem da arte', 985, ['A arte como linguagem (Quadrado Negro)', 'As nove artes: música, dança, pintura, escultura, teatro, literatura, cinema, fotografia, quadrinhos', 'Elementos visuais: ponto, linha, forma, plano, textura e cor', 'Fundamentos da linguagem visual (Saussure, Peirce)', 'Alfabetismo visual']],
+      ['Crítica de arte', 995, ['Visão do especialista', 'Crítica na Idade Média, Renascimento e Idade Moderna', 'Início da crítica no Brasil']],
+      ['Artistas brasileiros', 996, ['Beatriz Milhazes', 'Vik Muniz', 'Tarsila do Amaral e o Movimento Antropofágico', 'Cildo Meireles', 'Hélio Oiticica', 'Lygia Clark']],
+      ['Arte ambiental', 1001, ['Arte e natureza', 'Características e objetivos', 'Da land art à arte povera', 'Grandes artistas ambientais']]
+    ]},
+    { id: 'edfisica', n: 'Educação Física', tier: 3, enem: 'Linguagens', p: [893, 906], topics: [
+      ['Práticas corporais', 893, ['Competição e cooperação', 'Brincadeiras e jogos', 'Esportes', 'Ginásticas: geral, de condicionamento e de conscientização corporal', 'Danças', 'Lutas', 'Práticas de aventura', 'Cultura corporal do movimento']],
+      ['Capoeira', 895, ['Características', 'Surgimento e história', 'Capoeira angola, regional e contemporânea', 'Movimentos e ginga', 'Capoeira escolar e cultura afro-brasileira']],
+      ['Jogos Olímpicos e Paralímpicos', 900, ['Jogos Olímpicos de Inverno', 'Jogos Paralímpicos', 'Ranking de medalhas']],
+      ['Ginástica geral', 901, ['Objetivos, tipos e características', 'Benefícios', 'Ginástica geral na BNCC']],
+      ['Tipos de esporte', 903, ['Invasão', 'Marca', 'Precisão', 'Rede e parede', 'Combate', 'Campo e taco', 'Técnico-combinatórios']],
+      ['Esportes de aventura na natureza', 904, ['O que é esporte de aventura', 'Benefícios', 'Aventura na água, na terra e no ar']]
+    ]},
+    { id: 'espanhol', n: 'Espanhol', tier: 3, opt: true, enem: 'Linguagens · 5q', p: [1027, 1036], topics: [
+      ['Alfabeto e artigos', 1027, ['El alfabeto (ch, ll, rr)', 'Artigos definidos e indefinidos', 'Artigo neutro lo', 'Artigos contractos (al, del)']],
+      ['Substantivos', 1028, ['Gênero', 'Substantivos heterogenéricos', 'Substantivos homônimos', 'Grau', 'Número']],
+      ['Pronomes', 1030, ['Pronomes pessoais', 'Pronomes relativos', 'Pronomes interrogativos e exclamativos', 'Pronomes demonstrativos', 'Pronomes possessivos']],
+      ['Acentuação', 1031, ['Regras de acentuação', 'Regra do hiato', 'Heterotônicos']],
+      ['Adjetivos', 1032, ['Gênero e número', 'Grau', 'Apócope']],
+      ['Numerais', 1033, ['Cardinais', 'Ordinais', 'Fracionários', 'Multiplicativos', 'Coletivos']],
+      ['Horas, dias e meses', 1035, ['A hora', 'Dias da semana', 'Meses do ano']],
+      ['Falsos cognatos', 1036, ['Falsos amigos entre espanhol e português']]
+    ]}
+  ];
+
+  // ================= CADERNO DE QUESTÕES =================
+  // [id da matéria, nº de questões, anos, página das questões, página do gabarito, extras]
+  var QUESTIONS = {
+    matematica: [583, '2016–2022', 1323, 1457, [['Raciocínio lógico', 9, 1458, 1460]]],
+    fisica:     [203, '2015–2022', 1179, 1227],
+    quimica:    [230, '2015–2022', 1228, 1277],
+    portugues:  [471, '2015–2022', 1649, 1774],
+    biologia:   [238, '2015–2022', 1278, 1322],
+    historia:   [208, '2015–2022', 1461, 1503],
+    geografia:  [275, '2015–2022', 1504, 1558],
+    ingles:     [125, '2010–2022', 1805, 1835],
+    filosofia:  [133, '2008–2022', 1583, 1608],
+    sociologia: [108, '2008–2022', 1560, 1582],
+    literatura: [145, '2008–2022', 1609, 1648],
+    artes:      [90,  '2010–2018', 1779, 1804],
+    edfisica:   [10,  '2010–2018', 1776, 1778],
+    espanhol:   [120, '2010–2022', 1836, 1868]
+  };
+  var BY_YEAR = {
+    fisica:     { 2022: 28, 2021: 43, 2019: 21, 2018: 13, 2017: 14, 2016: 29, 2015: 13 },
+    quimica:    { 2022: 33, 2021: 39, 2019: 30, 2018: 17, 2017: 16, 2016: 30, 2015: 17 },
+    biologia:   { 2022: 29, 2021: 53, 2019: 38, 2018: 15, 2017: 15, 2016: 28, 2015: 15 },
+    matematica: { 2022: 85, 2021: 134, 2019: 90, 2018: 44, 2017: 45, 2016: 90 },
+    historia:   { 2022: 20, 2021: 40, 2019: 24, 2018: 17, 2017: 10, 2016: 23, 2015: 23 },
+    geografia:  { 2022: 31, 2021: 53, 2019: 35, 2018: 18, 2017: 24, 2016: 34, 2015: 17 },
+    portugues:  { 2022: 71, 2021: 118, 2019: 79, 2018: 28, 2017: 22, 2016: 50, 2015: 25 },
+    ingles:     { 2022: 10, 2021: 15, 2019: 10, 2018: 5, 2017: 5, 2016: 10, 2015: 5, 2014: 5, 2013: 5, 2012: 5, 2011: 5, 2010: 5 },
+    espanhol:   { 2022: 10, 2021: 15, 2019: 10, 2018: 5, 2017: 5, 2016: 10, 2015: 5, 2014: 5, 2013: 5, 2012: 5, 2011: 5, 2010: 5 },
+    filosofia:  { 2022: 11, 2021: 18, 2019: 15, 2018: 3, 2017: 5, 2016: 15, 2015: 3, 2014: 7, 2013: 1, 2012: 7, 2011: 4, 2010: 9, 2009: 3, 2008: 4 },
+    sociologia: { 2022: 7, 2021: 10, 2019: 10, 2018: 1, 2017: 6, 2016: 19, 2015: 2, 2014: 10, 2013: 3, 2012: 2, 2010: 12, 2008: 2 },
+    literatura: { 2022: 8, 2021: 3, 2019: 1, 2018: 6, 2017: 9, 2016: 15, 2015: 10, 2014: 5, 2013: 4, 2012: 9, 2011: 8, 2010: 4, 2008: 2 },
+    artes:      { 2018: 4, 2017: 6, 2016: 11, 2015: 5, 2014: 3, 2013: 2, 2012: 4, 2011: 4, 2010: 7 },
+    edfisica:   { 2018: 2, 2017: 1, 2016: 3, 2010: 1 }
+  };
+  var QUESTIONS_EXTRA = [
+    ['Conhecimentos gerais', 34, '2019–2022', 1871, 1876],
+    ['Atualidades', 4, '2019–2022', 1869, 1870],
+    ['História e Geografia dos estados', 4, '2022', 1559, 1559],
+    ['Música', 1, '2022', 1877, 1877]
+  ];
+
+  // ================= PROVAS (datas PREVISTAS; trocar e marcar confirmada quando sair o edital) =================
+  var PROVAS = [
+    { n: 'Univesp 2027', d: '2027-04-25', confirmada: false, quando: 'fim de abril' },
+    { n: 'ENEM 2027', d: '2027-11-07', confirmada: false, quando: 'início de novembro' }
+  ];
+  var PAGINAS_LIVRO = 1878;
+
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+  function norm(s) { return String(s).normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase(); }
+  function subsDe(t) { return Array.isArray(t[2]) ? t[2] : t[2].split(' · '); }
+  function livro(p, texto, titulo) { return '<a href="#" data-pg="' + p + '" data-t="' + esc(titulo || '') + '">' + texto + '</a>'; }
+  var TIERS = { 1: 'Prioridade', 2: 'Nas duas provas', 3: 'Só ENEM' };
+
+  // ---- marcações de "estudado" (ficam só neste navegador) ----
+  var FEITOS = {};
+  try { FEITOS = JSON.parse(localStorage.getItem('estudos.feitos') || '{}') || {}; } catch (e) { FEITOS = {}; }
+  function salvarFeitos() { try { localStorage.setItem('estudos.feitos', JSON.stringify(FEITOS)); } catch (e) {} }
+  function chave(s, t) { return s.id + '|' + t[0]; }
+  function contar(s) {
+    var tot = 0, ok = 0;
+    s.topics.forEach(function (t) { if (t[3] === 'pular') return; tot++; if (FEITOS[chave(s, t)]) ok++; });
+    return { tot: tot, ok: ok };
+  }
+
+  function tiered(render) {
+    var html = '', last = 0;
+    SUBJECTS.forEach(function (s) {
+      var item = render(s);
+      if (!item) return;
+      if (s.tier !== last) {
+        if (last) html += '</ul>';
+        html += '<div class="label tier t' + s.tier + '" data-tier="' + s.tier + '">' + TIERS[s.tier] + '</div><ul class="list">';
+        last = s.tier;
+      }
+      html += item;
+    });
+    return html + '</ul>';
+  }
+
+  // ---- contagem regressiva ----
+  (function () {
+    var hoje = new Date(); hoje.setHours(0, 0, 0, 0);
+    document.getElementById('contagem').innerHTML = PROVAS.map(function (p) {
+      var dias = Math.round((new Date(p.d + 'T00:00:00') - hoje) / 864e5);
+      if (dias < 0) return '';
+      return '<span style="white-space:nowrap">' + p.n + ': <b>' + (p.confirmada ? '' : '~') + dias + '</b> dias' +
+        (p.confirmada ? '' : ' <small>(previsão: ' + p.quando + ')</small>') + '</span>';
+    }).filter(Boolean).join(' · ');
+  })();
+
+  // ---- ordem de estudo (visão geral) ----
+  var order = '', lastT = 0;
+  SUBJECTS.forEach(function (s) {
+    if (s.tier !== lastT) {
+      if (lastT) order += '</ul>';
+      order += '<span class="label t' + s.tier + '">' + TIERS[s.tier] + '</span><ul class="t' + s.tier + '">';
+      lastT = s.tier;
+    }
+    order += '<li><a href="#' + s.id + '" data-open="' + s.id + '">' + s.n + (s.opt ? ' <span class="meta">opcional</span>' : '') + '</a>' +
+      '<span class="pct" id="pct-' + s.id + '"></span></li>';
+  });
+  document.getElementById('order').innerHTML = order + '</ul>';
+  document.querySelectorAll('[data-open]').forEach(function (a) {
+    a.addEventListener('click', function () { var d = document.getElementById(a.dataset.open); if (d) d.open = true; });
+  });
+
+  // ---- o que estudar ----
+  document.getElementById('list').innerHTML = tiered(function (s) {
+    var meta = [];
+    if (s.tier === 1) meta.push(s.rank + ' prioridade');
+    meta.push('ENEM ' + s.enem);
+    if (s.uni) meta.push('Univesp ' + s.uni);
+    if (s.opt) meta.push('opcional');
+    meta.push('<span data-prog="' + s.id + '"></span>');
+    return '<li><details class="top subject t' + s.tier + '" id="' + s.id + '" data-tier="' + s.tier + '">' +
+      '<summary><span class="name">' + s.n + '</span><span class="meta">' + meta.join(' · ') + '</span></summary>' +
+      '<ul class="topics">' + s.topics.map(function (t) {
+        var pular = t[3] === 'pular', feito = !pular && FEITOS[chave(s, t)];
+        return '<li class="topic-row' + (feito ? ' feito' : '') + '">' +
+          (pular ? '<span class="chk-sp"></span>'
+                 : '<input type="checkbox" class="chk" data-k="' + esc(chave(s, t)) + '" title="Marcar como estudado" aria-label="' + esc(t[0]) + ': estudado"' + (feito ? ' checked' : '') + '>') +
+          '<details class="topic">' +
+          '<summary><span class="name" data-raw="' + esc(t[0]) + '">' + esc(t[0]) + '</span>' +
+          (pular ? '<span class="tag">pode pular · não cai nas provas</span>' : '') + '</summary>' +
+          '<ul class="subs">' + subsDe(t).map(function (x) { return '<li data-raw="' + esc(x) + '">' + esc(x) + '</li>'; }).join('') +
+          '<li class="book">' + livro(t[1], 'livro, p. ' + t[1] + ' ↗', s.n + ' · ' + t[0]) + '</li></ul>' +
+          '</details></li>';
+      }).join('') + '</ul></details></li>';
+  });
+
+  function atualizarProgresso() {
+    var tot = 0, ok = 0;
+    SUBJECTS.forEach(function (s) {
+      var c = contar(s); tot += c.tot; ok += c.ok;
+      document.querySelectorAll('[data-prog="' + s.id + '"]').forEach(function (el) {
+        el.textContent = c.ok + '/' + c.tot + ' estudados';
+        el.className = c.ok === c.tot ? 'ok' : '';
+      });
+      document.getElementById('pct-' + s.id).textContent = c.ok ? Math.round(100 * c.ok / c.tot) + '%' : '';
+    });
+    var pct = tot ? Math.round(100 * ok / tot) : 0;
+    document.getElementById('progresso').innerHTML = 'Estudado: <b>' + ok + '</b> de ' + tot + ' tópicos' +
+      '<span class="bar" aria-hidden="true"><i style="width:' + pct + '%"></i></span>';
+  }
+  document.getElementById('list').addEventListener('change', function (e) {
+    var c = e.target;
+    if (!c.classList.contains('chk')) return;
+    if (c.checked) FEITOS[c.dataset.k] = 1; else delete FEITOS[c.dataset.k];
+    c.parentNode.classList.toggle('feito', c.checked);
+    salvarFeitos();
+    atualizarProgresso();
+  });
+  atualizarProgresso();
+
+  // ---- caderno de questões ----
+  function qItem(name, n, years, p, g, cls, extras, by, sid, tier) {
+    var links = '<li>' + livro(p, 'Questões ↗', name + ' · questões') + '<small>p. ' + p + '</small></li>' +
+                '<li>' + livro(g, 'Gabarito ↗', name + ' · gabarito') + '<small>p. ' + g + '</small></li>';
+    if (by) {
+      links += '<li class="years">Por ano (questões com ano indicado): ' + Object.keys(by).sort().reverse().map(function (y) { return '<b>' + y + '</b> ' + by[y]; }).join(' · ') + '</li>';
+    }
+    (extras || []).forEach(function (x) {
+      links += '<li>' + livro(x[2], x[0] + ' ↗', name + ' · ' + x[0]) + '<small>' + x[1] + ' questões · p. ' + x[2] + ' · gabarito p. ' + x[3] + '</small></li>';
+    });
+    return '<li><details class="top ' + cls + '" data-s="' + (sid || '') + '" data-nome="' + esc(name) + '" data-tier="' + tier + '">' +
+      '<summary><span class="name">' + name + '</span>' +
+      '<span class="meta">' + n + ' questões · ENEM ' + years + '<span class="dica"></span></span></summary><ul class="q-links">' + links + '</ul></details></li>';
+  }
+  var qhtml = tiered(function (s) {
+    var q = QUESTIONS[s.id];
+    return q ? qItem(s.n, q[0], q[1], q[2], q[3], 't' + s.tier, q[4], BY_YEAR[s.id], s.id, s.tier) : '';
+  });
+  qhtml += '<div class="label tier" data-tier="x">Outros</div><ul class="list">' +
+    QUESTIONS_EXTRA.map(function (x) { return qItem(x[0], x[1], x[2], x[3], x[4], 't3', null, null, '', 'x'); }).join('') + '</ul>';
+  document.getElementById('qlist').innerHTML = qhtml;
+
+  // ---- busca em "O que estudar" ----
+  function mark(raw, term) {
+    var i = term ? norm(raw).indexOf(term) : -1;
+    if (i < 0) return esc(raw);
+    return esc(raw.slice(0, i)) + '<mark>' + esc(raw.slice(i, i + term.length)) + '</mark>' + esc(raw.slice(i + term.length));
+  }
+  var q = document.getElementById('q'), empty = document.getElementById('empty');
+  q.addEventListener('input', filter);
+  function filter() {
+    var term = norm(q.value.trim()), any = false, tierHas = {};
+    document.querySelectorAll('#list .subject').forEach(function (sub) {
+      var subjectHit = term && norm(sub.querySelector('summary .name').textContent).indexOf(term) > -1;
+      var shown = 0;
+      sub.querySelectorAll('.topic').forEach(function (t) {
+        var nameEl = t.querySelector('summary .name');
+        var hitName = term && norm(nameEl.dataset.raw).indexOf(term) > -1, hitSub = false;
+        t.querySelectorAll('.subs li[data-raw]').forEach(function (li) {
+          if (term && norm(li.dataset.raw).indexOf(term) > -1) hitSub = true;
+          li.innerHTML = mark(li.dataset.raw, subjectHit ? '' : term);
+        });
+        nameEl.innerHTML = mark(nameEl.dataset.raw, subjectHit ? '' : term);
+        var show = !term || subjectHit || hitName || hitSub;
+        t.parentNode.style.display = show ? '' : 'none';
+        t.open = !!term && !subjectHit && hitSub;
+        if (show) shown++;
+      });
+      sub.parentNode.style.display = shown ? '' : 'none';
+      sub.open = !!term && shown > 0;
+      if (shown) { any = true; tierHas[sub.dataset.tier] = true; }
+    });
+    document.querySelectorAll('#list .tier').forEach(function (t) { t.style.display = tierHas[t.dataset.tier] ? '' : 'none'; });
+    empty.style.display = any ? 'none' : 'block';
+  }
+
+  // ---- busca no caderno (matéria ou assunto da matéria) ----
+  var TEMAS = {};
+  SUBJECTS.forEach(function (s) {
+    TEMAS[s.id] = s.topics.map(function (t) { return { nome: t[0], txt: norm(t[0] + ' ' + subsDe(t).join(' ')) }; });
+  });
+  var q2 = document.getElementById('q2'), empty2 = document.getElementById('empty2');
+  q2.addEventListener('input', function () {
+    var term = norm(q2.value.trim()), any = false, tierHas = {};
+    document.querySelectorAll('#qlist details.top').forEach(function (d) {
+      var hitNome = !term || norm(d.dataset.nome).indexOf(term) > -1, tema = null;
+      if (!hitNome && d.dataset.s) {
+        TEMAS[d.dataset.s].some(function (t) { if (t.txt.indexOf(term) > -1) { tema = t.nome; return true; } return false; });
+      }
+      var show = hitNome || !!tema;
+      d.parentNode.style.display = show ? '' : 'none';
+      d.querySelector('.dica').textContent = tema ? ' · assunto: ' + tema : '';
+      if (show) { any = true; tierHas[d.dataset.tier] = true; }
+    });
+    document.querySelectorAll('#qlist .tier').forEach(function (t) { t.style.display = tierHas[t.dataset.tier] ? '' : 'none'; });
+    empty2.style.display = any ? 'none' : 'block';
+  });
+
+  // ================= LIVRO: PDF guardado neste navegador, mostrado com PDF.js =================
+  var PDFJS = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/';
+  var livroBlob = null, livroDoc = null, carregandoDoc = null, pdfjsPronto = null, pedido = null;
+  var $ = function (id) { return document.getElementById(id); };
+  var ltEl = $('leitor'), ltArea = $('lt-area'), ltPag = $('lt-pag'), ltStatus = $('lt-status');
+  var leitor = { pg: 1, zoom: 1, titulo: '', tarefa: null, vez: 0 };
+
+  // IndexedDB (aguenta arquivos grandes; localStorage não)
+  function db() {
+    return new Promise(function (ok, erro) {
+      if (!window.indexedDB) { erro(new Error('navegador sem armazenamento')); return; }
+      var r = indexedDB.open('estudos', 1);
+      r.onupgradeneeded = function () { r.result.createObjectStore('arquivos'); };
+      r.onsuccess = function () { ok(r.result); };
+      r.onerror = function () { erro(r.error || new Error('armazenamento indisponível')); };
+    });
+  }
+  function dbOp(modo, fn) {
+    return db().then(function (d) {
+      return new Promise(function (ok, erro) {
+        var tx = d.transaction('arquivos', modo), res;
+        var r = fn(tx.objectStore('arquivos'));
+        r.onsuccess = function () { res = r.result; };
+        tx.oncomplete = function () { ok(res); };
+        tx.onerror = tx.onabort = function () { erro(tx.error || new Error('falha ao guardar')); };
+      });
+    });
+  }
+  var pronto = dbOp('readonly', function (s) { return s.get('livro'); })
+    .then(function (v) { if (v && v.blob) livroBlob = v.blob; }, function () {})
+    .then(mostrarEstado);
+
+  function mostrarEstado() {
+    $('livro-estado').innerHTML = livroBlob
+      ? 'Livro: <b>guardado neste aparelho</b> · <button type="button" data-acao="trocar">trocar</button> · <button type="button" data-acao="remover">remover</button>'
+      : 'Livro: <button type="button" data-acao="trocar">escolher o PDF</button> <small>para os links abrirem</small>';
+  }
+
+  function carregarPdfjs() {
+    if (!pdfjsPronto) pdfjsPronto = new Promise(function (ok, erro) {
+      var s = document.createElement('script');
+      s.src = PDFJS + 'pdf.min.js';
+      s.onload = function () { window.pdfjsLib.GlobalWorkerOptions.workerSrc = PDFJS + 'pdf.worker.min.js'; ok(window.pdfjsLib); };
+      s.onerror = function () { pdfjsPronto = null; erro(new Error('não carregou o leitor; confira a internet')); };
+      document.head.appendChild(s);
+    });
+    return pdfjsPronto;
+  }
+  function lerBlob(b) { return b.arrayBuffer ? b.arrayBuffer() : new Response(b).arrayBuffer(); }
+  function abrirDoc() {
+    if (livroDoc) return Promise.resolve(livroDoc);
+    if (!carregandoDoc) {
+      carregandoDoc = Promise.all([carregarPdfjs(), lerBlob(livroBlob)])
+        .then(function (r) { return r[0].getDocument({ data: new Uint8Array(r[1]) }).promise; })
+        .then(function (d) { livroDoc = d; carregandoDoc = null; return d; },
+              function (e) { carregandoDoc = null; throw e; });
+    }
+    return carregandoDoc;
+  }
+  function fecharDoc() { if (livroDoc) livroDoc.destroy(); livroDoc = null; carregandoDoc = null; }
+
+  // ---- escolher o arquivo ----
+  function msg(t, erro) { var m = $('pegar-msg'); m.textContent = t || ''; m.className = 'msg' + (erro ? ' erro' : ''); }
+  function abrirModal() { msg(''); $('pegar').hidden = false; }
+  function fecharModal() { $('pegar').hidden = true; }
+  $('pegar-cancelar').addEventListener('click', function () { pedido = null; fecharModal(); });
+  $('arquivo').addEventListener('change', function () {
+    var f = this.files[0], aviso = '';
+    this.value = '';
+    if (!f) return;
+    if (!/pdf/i.test(f.type) && !/\.pdf$/i.test(f.name)) { msg('Esse arquivo não é um PDF.', true); return; }
+    msg('Abrindo o livro… (é um arquivo grande, pode levar alguns segundos)');
+    var anterior = livroBlob;
+    fecharDoc();
+    livroBlob = f;
+    abrirDoc().then(function (doc) {
+      if (Math.abs(doc.numPages - PAGINAS_LIVRO) > 5) {
+        aviso = 'Esse PDF tem ' + doc.numPages + ' páginas e o livro esperado tem ' + PAGINAS_LIVRO + '. As páginas dos links podem não bater.';
+      }
+      return dbOp('readwrite', function (s) { return s.put({ blob: f, nome: f.name, tamanho: f.size, em: Date.now() }, 'livro'); })
+        .then(function () { if (navigator.storage && navigator.storage.persist) navigator.storage.persist().catch(function () {}); },
+              function () { aviso += (aviso ? '\n\n' : '') + 'Não deu para guardar o arquivo neste navegador (falta espaço ou aba anônima). Ele vai funcionar agora, mas será pedido de novo na próxima visita.'; });
+    }).then(function () {
+      mostrarEstado();
+      fecharModal();
+      if (aviso) alert(aviso);
+      if (pedido) { var p = pedido; pedido = null; abrirLeitor(p.pg, p.titulo); }
+    }).catch(function (e) {
+      livroBlob = anterior;
+      msg('Não consegui abrir esse PDF: ' + (e && e.message || e), true);
+    });
+  });
+
+  // ---- leitor ----
+  function status(html) { ltStatus.innerHTML = html || ''; ltStatus.hidden = !html; }
+  function abrirLivro(pg, titulo) {
+    pronto.then(function () {
+      if (livroBlob) abrirLeitor(pg, titulo);
+      else { pedido = { pg: pg, titulo: titulo }; abrirModal(); }
+    });
+  }
+  function abrirLeitor(pg, titulo) {
+    leitor.titulo = titulo || '';
+    leitor.zoom = 1;
+    ltEl.hidden = false;
+    document.body.style.overflow = 'hidden';
+    if (!history.state || !history.state.leitor) history.pushState({ leitor: true }, '');
+    $('lt-titulo').textContent = leitor.titulo;
+    if (!livroDoc) status('Abrindo o livro…');
+    abrirDoc().then(function (doc) {
+      $('lt-total').textContent = '/ ' + doc.numPages;
+      ltPag.max = doc.numPages;
+      irPara(pg, true);
+    }).catch(function (e) {
+      status('Não consegui abrir o livro (' + esc(e && e.message || e) + ').<br><br><button type="button" class="btn" data-acao="trocar">Escolher o PDF de novo</button>');
+    });
+  }
+  function fecharLeitor() { ltEl.hidden = true; document.body.style.overflow = ''; }
+  function irPara(pg, topo) {
+    if (!livroDoc) return;
+    pg = Math.max(1, Math.min(livroDoc.numPages, parseInt(pg, 10) || 1));
+    leitor.pg = pg;
+    ltPag.value = pg;
+    $('lt-ant').disabled = pg <= 1;
+    $('lt-prox').disabled = pg >= livroDoc.numPages;
+    desenhar(topo);
+  }
+  function desenhar(topo) {
+    var vez = ++leitor.vez;
+    if (leitor.tarefa) { leitor.tarefa.cancel(); leitor.tarefa = null; }
+    livroDoc.getPage(leitor.pg).then(function (page) {
+      if (vez !== leitor.vez) return;
+      var base = page.getViewport({ scale: 1 });
+      var largura = Math.min(ltArea.clientWidth - 24, 900);
+      var vp = page.getViewport({ scale: largura / base.width * leitor.zoom });
+      var dpr = Math.min(window.devicePixelRatio || 1, 2);
+      var c = document.createElement('canvas');           // canvas novo a cada página: evita conflito entre renderizações
+      c.width = Math.floor(vp.width * dpr); c.height = Math.floor(vp.height * dpr);
+      c.style.width = Math.floor(vp.width) + 'px'; c.style.height = Math.floor(vp.height) + 'px';
+      var t = page.render({ canvasContext: c.getContext('2d'), viewport: vp, transform: dpr !== 1 ? [dpr, 0, 0, dpr, 0, 0] : null });
+      leitor.tarefa = t;
+      return t.promise.then(function () {
+        if (vez !== leitor.vez) return;
+        leitor.tarefa = null;
+        c.id = 'lt-canvas';
+        ltArea.replaceChild(c, $('lt-canvas'));
+        status('');
+        if (topo) { ltArea.scrollTop = 0; ltArea.scrollLeft = 0; }
+      });
+    }).catch(function (e) {
+      if (e && e.name === 'RenderingCancelledException') return;
+      status('Erro ao mostrar a página: ' + esc(e && e.message || e));
+    });
+  }
+  $('lt-fechar').addEventListener('click', function () { if (history.state && history.state.leitor) history.back(); else fecharLeitor(); });
+  window.addEventListener('popstate', function () { if (!ltEl.hidden) fecharLeitor(); });
+  $('lt-ant').addEventListener('click', function () { irPara(leitor.pg - 1, true); });
+  $('lt-prox').addEventListener('click', function () { irPara(leitor.pg + 1, true); });
+  ltPag.addEventListener('change', function () { irPara(ltPag.value, true); });
+  $('lt-mais').addEventListener('click', function () { leitor.zoom = Math.min(3, leitor.zoom + .25); desenhar(); });
+  $('lt-menos').addEventListener('click', function () { leitor.zoom = Math.max(.5, leitor.zoom - .25); desenhar(); });
+  var redim;
+  window.addEventListener('resize', function () { if (ltEl.hidden || !livroDoc) return; clearTimeout(redim); redim = setTimeout(desenhar, 200); });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && !$('pegar').hidden) { pedido = null; fecharModal(); return; }
+    if (ltEl.hidden) return;
+    if (e.key === 'Escape') $('lt-fechar').click();
+    else if (e.target === ltPag) return;
+    else if (e.key === 'ArrowLeft') irPara(leitor.pg - 1, true);
+    else if (e.key === 'ArrowRight') irPara(leitor.pg + 1, true);
+  });
+
+  // ---- cliques: links do livro e botões do livro ----
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest('[data-pg]');
+    if (a) { e.preventDefault(); abrirLivro(+a.dataset.pg, a.dataset.t); return; }
+    var b = e.target.closest('[data-acao]');
+    if (!b) return;
+    if (b.dataset.acao === 'trocar') { pedido = ltEl.hidden ? null : { pg: leitor.pg, titulo: leitor.titulo }; abrirModal(); }
+    if (b.dataset.acao === 'remover' && confirm('Remover o livro deste navegador? Você pode escolher o arquivo de novo depois.')) {
+      dbOp('readwrite', function (s) { return s.delete('livro'); }).catch(function () {}).then(function () {
+        fecharDoc(); livroBlob = null; mostrarEstado();
+      });
+    }
+  });
+</script>
+</body>
+</html>
